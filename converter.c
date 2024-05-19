@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
   static const char *help_flag = "--help";
   for (int i = 1; i < argc; i++)
   {
-    if (strncmp(help_flag, argv[1], strlen(help_flag)) == 0)
+    if (strncmp(help_flag, argv[i], strlen(help_flag)) == 0)
     {
       print_help();
       exit(EXIT_SUCCESS);
