@@ -10,7 +10,7 @@
 #define HEX_BASE 16
 #define MAX_INT_LEN 64
 #define NUM_BASES 3
-#define MIN_ARGS 2
+#define MIN_ARGS 3
 
 enum base {
   HEX = 'h',

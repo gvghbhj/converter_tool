@@ -2,13 +2,14 @@
 
 int main(int argc, char *argv[])
 {
-  if (argc < MIN_ARGS)
+  if (argc == 1)
   {
+    printf("ERROR: Not enough args");
     print_help();
     exit(EXIT_FAILURE);
   }
+  // Checking for a help flag in args
   static const char *help_flag = "--help";
-  
   for (int i = 1; i < argc; i++)
   {
     if (strncmp(help_flag, argv[1], strlen(help_flag)) == 0)
@@ -17,8 +18,20 @@ int main(int argc, char *argv[])
       exit(EXIT_SUCCESS);
     }
   }
+  
+  // need at least 3 args if no help flag
+  if (argc < MIN_ARGS)
+  {
+    print_help();
+    exit(EXIT_FAILURE);
+  }
+  
+
+  // ./converter dh 10 for example, d is the decimal, base to convert from, h is hexadecimal base to convert to
   enum base convert_from = argv[1][0];
   enum base convert_to = argv[1][1];
+
+  // A function pointer to the function that the for loop will execute
   void (*function_ptr) (enum base format, char **number);
 
   if (convert_to == HEX)
@@ -38,7 +51,8 @@ int main(int argc, char *argv[])
     printf("ERROR: Not a valid base to convert from\n");
     exit(EXIT_FAILURE);
   }
-
+  
+  // execute the correct function for all members of argv
   for (int i = 2; i < argc; i++)
   {
     (*function_ptr) (convert_from, &(argv[i]));
@@ -47,12 +61,13 @@ int main(int argc, char *argv[])
   exit(EXIT_SUCCESS);
 }
 
+// A function that takes in either a binary or decimal number, and prints the equivalent hex number
 void print_hex(enum base format, char **number)
 {
   if (format == DEC)
   {
     char *endptr;
-    printf("%lx\n", strtol(*number, &endptr, DECIMAL_BASE));
+    printf("%lx\n", strtol(*number, &endptr, DECIMAL_BASE)); // see man strtol
   }
   else if (format == BIN)
   {
@@ -66,6 +81,7 @@ void print_hex(enum base format, char **number)
   }
 }
 
+// A function that takes in either a hex or decimal number, and prints the equivalent binary number
 void print_bin(enum base format, char **number)
 {
   char *endptr;
@@ -86,13 +102,14 @@ void print_bin(enum base format, char **number)
     exit(EXIT_FAILURE);
   }
 
+  // array that stores binary number
   char *binary = malloc(MAX_INT_LEN + 1);
-  char *original_binary = binary;
+  char *original_binary = binary; // because we increment and decrement the binary pointer, to free binary, it is necessary to have a pointer to original binary.
 
-  if(binary == NULL)
+  if(binary == NULL) // memory not allocated properly
       exit(EXIT_FAILURE);
 
-  binary += MAX_INT_LEN;
+  binary += MAX_INT_LEN; // go to last element in array
   *binary = '\0';
 
   if(decimal == 0)
@@ -113,6 +130,7 @@ void print_bin(enum base format, char **number)
   free(original_binary);
 }
 
+// A function that takes in either a binary or hex number, and prints the equivalent decimal number
 void print_dec(enum base format, char **number)
 {
   if (format == BIN)
@@ -132,6 +150,7 @@ void print_dec(enum base format, char **number)
   }
 }
 
+// prints out help info
 void print_help(void)
 {
   printf("converter: a tool that converts to/from binary, hexadecimal, and decimal. (base 2, 16, 10)\n\n");
