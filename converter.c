@@ -2,6 +2,21 @@
 
 int main(int argc, char *argv[])
 {
+  if (argc < MIN_ARGS)
+  {
+    print_help();
+    exit(EXIT_FAILURE);
+  }
+  static const char *help_flag = "--help";
+  
+  for (int i = 1; i < argc; i++)
+  {
+    if (strncmp(help_flag, argv[1], strlen(help_flag)) == 0)
+    {
+      print_help();
+      exit(EXIT_SUCCESS);
+    }
+  }
   enum base convert_from = argv[1][0];
   enum base convert_to = argv[1][1];
   void (*function_ptr) (enum base format, char **number);
@@ -115,4 +130,12 @@ void print_dec(enum base format, char **number)
     printf("ERROR: Not a valid base to convert from\n");
     exit(EXIT_FAILURE);
   }
+}
+
+void print_help(void)
+{
+  printf("converter: a tool that converts to/from binary, hexadecimal, and decimal. (base 2, 16, 10)\n\n");
+  printf("FORMAT: ./converter (convert_from)(convert_to) [array of numbers in base of convert_from]\n\n");
+  printf("FLAGS: --help (prints out this help message)\n\n");
+  printf("EXAMPLE: to convert the decimal numbers 18 and 20 to hexadecimal: ./converter dh 18 20\n");
 }

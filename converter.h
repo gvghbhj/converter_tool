@@ -10,6 +10,7 @@
 #define HEX_BASE 16
 #define MAX_INT_LEN 64
 #define NUM_BASES 3
+#define MIN_ARGS 2
 
 enum base {
   HEX = 'h',
@@ -21,4 +22,5 @@ void print_hex(enum base format, char **number);
 void print_dec(enum base format, char **number);
 void print_bin(enum base format, char **number);
 
+void print_help(void);
 #endif
