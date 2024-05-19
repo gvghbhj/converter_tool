@@ -4,4 +4,4 @@ FORMAT: ./converter (convert_from)(convert_to) [array of numbers in base of conv
 
 FLAGS: --help (prints out a help message)
 
-EXAMPLE: to convert the decimal numbers 18 and 20 to hexadecimal: ./converter dh 18 
+EXAMPLE: to convert the decimal numbers 18 and 20 to hexadecimal: ./converter dh 18 20
