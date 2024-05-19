@@ -67,12 +67,12 @@ void print_hex(enum base format, char **number)
   if (format == DEC)
   {
     char *endptr;
-    printf("%lx\n", strtol(*number, &endptr, DECIMAL_BASE)); // see man strtol
+    printf("0x%lx\n", strtol(*number, &endptr, DECIMAL_BASE)); // see man strtol
   }
   else if (format == BIN)
   {
     char *endptr;
-    printf("%lx\n", strtol(*number, &endptr, BINARY_BASE));
+    printf("0x%lx\n", strtol(*number, &endptr, BINARY_BASE));
   }
   else 
   {
@@ -125,7 +125,7 @@ void print_bin(enum base format, char **number)
       decimal = decimal / 2;
   }
 
-  printf("%s\n", binary);
+  printf("0b%s\n", binary);
 
   free(original_binary);
 }
@@ -156,5 +156,6 @@ void print_help(void)
   printf("converter: a tool that converts to/from binary, hexadecimal, and decimal. (base 2, 16, 10)\n\n");
   printf("FORMAT: ./converter (convert_from)(convert_to) [array of numbers in base of convert_from]\n\n");
   printf("FLAGS: --help (prints out this help message)\n\n");
-  printf("EXAMPLE: to convert the decimal numbers 18 and 20 to hexadecimal: ./converter dh 18 20\n");
+  printf("EXAMPLE: to convert the decimal numbers 18 and 20 to hexadecimal: ./converter dh 18 20\n\n");
+  printf("NOTE: DO NOT ADD 0x or 0b when giving hex or binary input\n");
 }
