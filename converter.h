@@ -11,6 +11,8 @@
 #define MAX_INT_LEN 64
 #define NUM_BASES 3
 #define MIN_ARGS 3
+#define ANSI_ESCAPE_CODE_BLUE "\033[34;1m"
+#define ANSI_ESCAPE_CODE_RESET "\033[0m"
 
 enum base {
   HEX = 'h',

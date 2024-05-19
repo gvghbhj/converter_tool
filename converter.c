@@ -51,6 +51,8 @@ int main(int argc, char *argv[])
     printf("ERROR: Not a valid base to convert from\n");
     exit(EXIT_FAILURE);
   }
+
+  printf("\n"); // for better formatting
   
   // execute the correct function for all members of argv
   for (int i = 2; i < argc; i++)
@@ -67,12 +69,14 @@ void print_hex(enum base format, char **number)
   if (format == DEC)
   {
     char *endptr;
-    printf("0x%lx\n", strtol(*number, &endptr, DECIMAL_BASE)); // see man strtol
+    printf("%s in hex is: ", *number);
+    printf(ANSI_ESCAPE_CODE_BLUE "0x%lx\n" ANSI_ESCAPE_CODE_RESET, strtol(*number, &endptr, DECIMAL_BASE)); // see man strtol
   }
   else if (format == BIN)
   {
     char *endptr;
-    printf("0x%lx\n", strtol(*number, &endptr, BINARY_BASE));
+    printf("%s in hex is: ", *number);
+    printf(ANSI_ESCAPE_CODE_BLUE "0x%lx\n" ANSI_ESCAPE_CODE_RESET, strtol(*number, &endptr, BINARY_BASE));
   }
   else 
   {
@@ -125,7 +129,8 @@ void print_bin(enum base format, char **number)
       decimal = decimal / 2;
   }
 
-  printf("0b%s\n", binary);
+  printf("%s in binary is: ", *number);
+  printf(ANSI_ESCAPE_CODE_BLUE "0b%s\n" ANSI_ESCAPE_CODE_RESET, binary);
 
   free(original_binary);
 }
@@ -136,12 +141,14 @@ void print_dec(enum base format, char **number)
   if (format == BIN)
   {
     char *endptr;
-    printf("%ld\n", strtol(*number, &endptr, BINARY_BASE));
+    printf("%s is decimal is: ", *number);
+    printf(ANSI_ESCAPE_CODE_BLUE "%ld\n" ANSI_ESCAPE_CODE_RESET, strtol(*number, &endptr, BINARY_BASE));
   }
   else if (format == HEX)
   {
     char *endptr;
-    printf("%ld\n", strtol(*number, &endptr, HEX_BASE));
+    printf("%s is decimal is: ", *number);
+    printf(ANSI_ESCAPE_CODE_BLUE "%ld\n" ANSI_ESCAPE_CODE_RESET, strtol(*number, &endptr, HEX_BASE));
   }
   else 
   {
