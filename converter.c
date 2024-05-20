@@ -70,13 +70,13 @@ void print_hex(enum base format, char **number)
   {
     char *endptr;
     printf("%s in hex is: ", *number);
-    printf(ANSI_ESCAPE_CODE_BLUE "0x%lx\n" ANSI_ESCAPE_CODE_RESET, strtol(*number, &endptr, DECIMAL_BASE)); // see man strtol
+    printf(ANSI_ESCAPE_CODE_BLUE "0x%.2lx\n" ANSI_ESCAPE_CODE_RESET, strtol(*number, &endptr, DECIMAL_BASE)); // see man strtol
   }
   else if (format == BIN)
   {
     char *endptr;
     printf("%s in hex is: ", *number);
-    printf(ANSI_ESCAPE_CODE_BLUE "0x%lx\n" ANSI_ESCAPE_CODE_RESET, strtol(*number, &endptr, BINARY_BASE));
+    printf(ANSI_ESCAPE_CODE_BLUE "0x%.2lx\n" ANSI_ESCAPE_CODE_RESET, strtol(*number, &endptr, BINARY_BASE));
   }
   else 
   {
