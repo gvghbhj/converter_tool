@@ -14,7 +14,8 @@
 #define ANSI_ESCAPE_CODE_BLUE "\033[34;1m"
 #define ANSI_ESCAPE_CODE_RESET "\033[0m"
 
-enum base {
+enum base
+{
   HEX = 'h',
   BIN = 'b',
   DEC = 'd'

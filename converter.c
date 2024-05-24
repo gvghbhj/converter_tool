@@ -129,7 +129,7 @@ void print_bin(enum base format, char **number)
       decimal = decimal / 2;
   }
 
-  printf("%s in binary is: ", *number);
+  printf("%s in %ld bit binary is: ", *number, strlen(binary));
   printf(ANSI_ESCAPE_CODE_BLUE "0b%s\n" ANSI_ESCAPE_CODE_RESET, binary);
 
   free(original_binary);
